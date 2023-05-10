@@ -26,35 +26,80 @@ int push(stack_t **stack, unsigned int line_number)
 int pall(stack_t **stack)
 {
     stack_t *current = *stack;
-    int nodes = 0;
 
-    printf("Stack:\n");
-    while (current != NULL)
+    if (!*stack)
+        printf("empty\n");
+
+    while (current)
     {
         printf("%d\n", current->n);
-        nodes++;
         current = current->next;
     }
 
-    return nodes;
+    return (0);
 }
 
 int pop(stack_t **stack)
 {
     stack_t *temp;
 
-    if (*stack == NULL) {
-        fprintf(stderr, "Error: stack is empty.\n");
-        return 0;
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L<line_number>: can't pop an empty stack\n");
+        exit(EXIT_FAILURE);
     }
 
     temp = *stack;
     *stack = (*stack)->next;
-    if (*stack != NULL)
+
+    if (*stack)
         (*stack)->prev = NULL;
     free(temp);
 
     return (0);
 }
 
+int pint(stack_t **stack)
+{
+    if (!*stack)
+    {
+        fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
+        exit(EXIT_FAILURE);
+    }
 
+    printf("%d\n", (*stack)->n);
+
+    return (0);
+}
+
+int add(stack_t **stack)
+{
+    int sum = 0, i = 0, nodes = 0;
+    stack_t *current = *stack;
+
+    if (!*stack)
+        return (0);
+
+    while (current)
+    {
+        nodes++;
+        current = current->next;
+    }
+
+    if (nodes < 2)
+    {
+        fprintf(stderr, "L<line_number>: can't add, stack too short\n");
+        exit(EXIT_FAILURE);
+    }
+
+    while (i < 2)
+	{
+		sum += (*stack)->n;
+		*stack = (*stack)->next;
+        i++;
+	}
+
+    printf("%d\n", sum);
+
+	return (0);
+}
