@@ -1,4 +1,3 @@
-feef
-push
-fwfw
-pop
+push 5
+push 7
+pall

@@ -5,12 +5,25 @@ int handle_opcode(char *line)
     char *opcode[] = {"push", "pop", "pint", "pall", "swap", "add", "nop", NULL};
     char **line_contents;
     int i;
+    stack_t *stack = NULL;
 
     line_contents = tokenizer(line, " ");
 
     for (i = 0; opcode[i]; i++)
+    {
         if (strcmp(opcode[i], line_contents[0]) == 0)
-            printf("encontrado: %s\n", opcode[i]);
+        {
+            if (i == 0)
+            {
+                push(&stack, atoi(line_contents[1]));
+            }
+
+            if (i == 3)
+            {
+                pall(&stack);
+            }
+        }
+    }
 
     return (0);
 }

@@ -41,5 +41,8 @@ typedef struct instruction_s
 int read_file(char *file);
 char **tokenizer(char *input, char *delim);
 int handle_opcode(char *line);
+int push(stack_t **stack, unsigned int line_number);
+int pall(stack_t **stack);
+int pop(stack_t **stack);
 
 #endif
