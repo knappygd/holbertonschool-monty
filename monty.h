@@ -39,6 +39,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern char *push_val;
+
 int read_file(char *file);
 char **tokenizer(char *input, char *delim);
 int handle_opcode(char *line, int line_num);
@@ -48,5 +50,8 @@ int pop(stack_t **stack, unsigned int line_number);
 int pint(stack_t **stack, unsigned int line_number);
 int add(stack_t **stack, unsigned int line_number);
 int space_input(char *input);
+int swap(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void free_list(stack_t **stack);
 
 #endif

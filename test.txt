@@ -1,2 +1,6 @@
-push r
+push
+push 5
+pall
+nop
+swap
 pall

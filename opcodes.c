@@ -9,7 +9,11 @@
 */
 int push(stack_t **stack, unsigned int line_number)
 {
-    if (!line_number)
+    int n_push;
+
+    n_push = atoi(push_val);
+
+    if (n_push == 0 && strcmp(push_val, "0") != 0)
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
         exit(EXIT_FAILURE);
@@ -22,7 +26,7 @@ int push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    new_node->n = line_number;
+    new_node->n = n_push;
     new_node->prev = NULL;
     new_node->next = *stack;
 

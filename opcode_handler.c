@@ -1,5 +1,7 @@
 #include "monty.h"
 
+char *push_val;
+
 /**
  * handle_opcode - Assigns a flag value depending on the command from the file.
  * @line: A line from the file to work with.
@@ -30,6 +32,10 @@ int handle_opcode(char *line, int line_num)
         flag = 4;
     else if (strcmp(line_contents[0], "add") == 0)
         flag = 5;
+    else if (strcmp(line_contents[0], "swap") == 0)
+        flag = 6;
+    else if (strcmp(line_contents[0], "nop") == 0)
+        flag = 7;
 
     else
     {
@@ -52,7 +58,7 @@ int read_file(char *file)
     char **line_contents;
     ssize_t op, rd;
     char *buffer;
-    int letters = 1024, i = 0, ret;
+    int letters = 1024, i = 0, ret, j = 0;
     stack_t *stack = NULL;
 
     buffer = malloc(sizeof(char) * letters);
@@ -84,7 +90,26 @@ int read_file(char *file)
 
         ret = handle_opcode(tokens[i], i + 1);
         if (ret == 1)
-            push(&stack, atoi(line_contents[1]));
+        {
+            if (!line_contents[1])
+            {
+                fprintf(stderr, "L%d: usage: push integer\n", i + 1);
+                exit(EXIT_FAILURE);
+            }
+
+            push_val = line_contents[1];
+
+            while (push_val[j])
+            {
+                if (!isdigit(push_val[j]))
+                {
+                    fprintf(stderr, "L%d: usage: push integer\n", i + 1);
+                    exit(EXIT_FAILURE);
+                }
+                j++;
+            }
+            push(&stack, i + 1);
+        }
         else if (ret == 2)
             pop(&stack, i + 1);
         else if (ret == 3)
@@ -93,6 +118,10 @@ int read_file(char *file)
             pint(&stack, i + 1);
         else if (ret == 5)
             add(&stack, i + 1);
+        else if (ret == 6)
+            swap(&stack, i + 1);
+        else if (ret == 7)
+            nop(&stack, i + 1);
         i++;
     }
 
