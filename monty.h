@@ -52,6 +52,6 @@ int add(stack_t **stack, unsigned int line_number);
 int space_input(char *input);
 int swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void free_list(stack_t **stack);
+void free_stack(stack_t **stack);
 
 #endif

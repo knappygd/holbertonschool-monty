@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void free_list(stack_t **stack)
+void free_stack(stack_t **stack)
 {
 	stack_t *buffer;
 

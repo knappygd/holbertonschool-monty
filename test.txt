@@ -1,5 +1,5 @@
-push
-push 5
+push 7
+push 
 pall
 nop
 swap
