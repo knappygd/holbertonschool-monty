@@ -14,5 +14,5 @@ int main(int argc, char **argv)
 
     read_file(file);
 
-    return (0);    
+    return (0);
 }
