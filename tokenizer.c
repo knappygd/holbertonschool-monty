@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * tokenizer - Splits a string input and returns an array with the tokens.
+ * @input: The string to split.
+ * @delim: The delimiter to which to split by.
+ * 
+ * Return: An array containing the tokens and a null terminator.
+*/
 char **tokenizer(char *input, char *delim)
 {
 	char *token, *input_aux, **token_arr;

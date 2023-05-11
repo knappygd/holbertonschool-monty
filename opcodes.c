@@ -1,7 +1,20 @@
 #include "monty.h"
 
+/**
+ * push - Adds a new node to the stack with an int value.
+ * @stack: Double pointer to the head of the stack
+ * @line_number: The line on which the command is executed.
+ * 
+ * Return: 0 if successful
+*/
 int push(stack_t **stack, unsigned int line_number)
 {
+    if (!line_number)
+    {
+        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
     stack_t *new_node = malloc(sizeof(stack_t));
     if (!new_node)
     {
@@ -18,17 +31,23 @@ int push(stack_t **stack, unsigned int line_number)
 
     *stack = new_node;
 
-    printf("Added node with value %d\n", new_node->n);
-
     return (0);
 }
 
+/**
+ * pall - Prints the values of all the nodes in the stack.
+ * @stack: Double pointer to the head of the stack.
+ * 
+ * Return: 0 if successful
+*/
 int pall(stack_t **stack)
 {
+    if (*stack == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+        
     stack_t *current = *stack;
-
-    if (!*stack)
-        printf("empty\n");
 
     while (current)
     {
@@ -39,13 +58,20 @@ int pall(stack_t **stack)
     return (0);
 }
 
-int pop(stack_t **stack)
+/**
+ * pop - Deletes the node at the top of the stack.
+ * @stack: Double pointer to the head of the stack.
+ * @line_number: The line on which the command is executed.
+ * 
+ * Return: 0 if successful
+*/
+int pop(stack_t **stack, unsigned int line_number)
 {
     stack_t *temp;
 
     if (*stack == NULL)
     {
-        fprintf(stderr, "L<line_number>: can't pop an empty stack\n");
+        fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
 
@@ -59,11 +85,18 @@ int pop(stack_t **stack)
     return (0);
 }
 
-int pint(stack_t **stack)
+/**
+ * pint - Prints the value of the node at the top of the stack.
+ * @stack: Double pointer to the head of the stack.
+ * @line_number: The line on which the command is executed.
+ * 
+ * Return: 0 if successful
+*/
+int pint(stack_t **stack, unsigned int line_number)
 {
     if (!*stack)
     {
-        fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
+        fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
         exit(EXIT_FAILURE);
     }
 
@@ -72,13 +105,23 @@ int pint(stack_t **stack)
     return (0);
 }
 
-int add(stack_t **stack)
+/**
+ * add - Adds the value of the two last nodes.
+ * @stack: Double pointer to the head of the stack.
+ * @line_number: The line on which the command is executed.
+ * 
+ * Return: 0 if successful
+*/
+int add(stack_t **stack, unsigned int line_number)
 {
     int sum = 0, i = 0, nodes = 0;
     stack_t *current = *stack;
 
     if (!*stack)
-        return (0);
+    {
+        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 
     while (current)
     {
@@ -88,7 +131,7 @@ int add(stack_t **stack)
 
     if (nodes < 2)
     {
-        fprintf(stderr, "L<line_number>: can't add, stack too short\n");
+        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
         exit(EXIT_FAILURE);
     }
 

@@ -1,12 +1,2 @@
-push 5
-push 7
-push 3
+push r
 pall
-pop
-rwfrfr
-pall
-pint
-push 6
-add
-pall
-rfrfd

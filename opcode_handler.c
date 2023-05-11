@@ -1,8 +1,14 @@
 #include "monty.h"
 
+/**
+ * handle_opcode - Assigns a flag value depending on the command from the file.
+ * @line: A line from the file to work with.
+ * @line_num: The line number.
+ * 
+ * Return: The flag.
+*/
 int handle_opcode(char *line, int line_num)
 {
-    /* char *opcode[] = {"push", "pop", "pint", "pall", "swap", "add", "nop", NULL}; */
     char **line_contents;
     int flag = 0;
 
@@ -34,7 +40,12 @@ int handle_opcode(char *line, int line_num)
     return (flag);
 }
 
-
+/**
+ * read_file - Reads the content of the file passed and tokenizes the content.
+ * @file: The file to read from.
+ * 
+ * Return: 0 if successful
+*/
 int read_file(char *file)
 {
     char **tokens;
@@ -63,23 +74,53 @@ int read_file(char *file)
 
     while (tokens[i])
     {
+        if (space_input(tokens[i]) > 0)
+        {
+            i++;
+            continue;
+        }
+
         line_contents = tokenizer(strdup(tokens[i]), " ");
 
         ret = handle_opcode(tokens[i], i + 1);
         if (ret == 1)
             push(&stack, atoi(line_contents[1]));
         else if (ret == 2)
-            pop(&stack);
+            pop(&stack, i + 1);
         else if (ret == 3)
             pall(&stack);
         else if (ret == 4)
-            pint(&stack);
+            pint(&stack, i + 1);
         else if (ret == 5)
-            add(&stack);
+            add(&stack, i + 1);
         i++;
     }
 
     free(buffer);
 
     return (0);
+}
+
+/**
+ * space_input - Checker function to handle space-char-only lines (blanks).
+ * @input: The line to check.
+ * 
+ * Return: 0 if there is a command, or a positive number if it's a blank line.
+*/
+int space_input(char *input)
+{
+	int i, in_len = strlen(input);
+
+	for (i = 0; i < in_len; i++)
+	{
+		if (input[i] != ' ')
+		{
+			if (input[i] == 10)
+				break;
+			i = 0;
+			break;
+		}
+	}
+
+	return (i);
 }

@@ -44,8 +44,9 @@ char **tokenizer(char *input, char *delim);
 int handle_opcode(char *line, int line_num);
 int push(stack_t **stack, unsigned int line_number);
 int pall(stack_t **stack);
-int pop(stack_t **stack);
-int pint(stack_t **stack);
-int add(stack_t **stack);
+int pop(stack_t **stack, unsigned int line_number);
+int pint(stack_t **stack, unsigned int line_number);
+int add(stack_t **stack, unsigned int line_number);
+int space_input(char *input);
 
 #endif
