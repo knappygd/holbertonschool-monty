@@ -39,19 +39,17 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern char *push_val;
-
-int read_file(char *file);
-char **tokenizer(char *input, char *delim);
-int handle_opcode(char *line, int line_num);
-int push(stack_t **stack, unsigned int line_number);
-int pall(stack_t **stack);
-int pop(stack_t **stack, unsigned int line_number);
-int pint(stack_t **stack, unsigned int line_number);
-int add(stack_t **stack, unsigned int line_number);
+int read_file(FILE *file);
+void free_stack(stack_t *stack);
 int space_input(char *input);
-int swap(stack_t **stack, unsigned int line_number);
+int handle_opcode(char *line, int line_num);
+
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t **stack);
 
 #endif
