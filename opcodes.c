@@ -21,18 +21,18 @@ void push(stack_t **stack, unsigned int line_number)
     }
 
     token = strtok(NULL, " \t\n");         /*continue static tokenization from read_file*/
-    if (token == NULL || !isdigit(*token)) /*check if is a digit or maybe it will be a segmentation fault*/
+    if (token == NULL) /*check if is a digit or maybe it will be a segmentation fault*/
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
         free(new_node), free_stack(*stack), exit(EXIT_FAILURE); /*free all before exit*/
     }
-    /*convert the character to integer*/
-    while (token[i])
+
+    while (token[i] && token[0] != '-')
     {
         if (!isdigit(token[i]))
         {
             fprintf(stderr, "L%d: usage: push integer\n", line_number);
-            free(new_node), free_stack(*stack), exit(EXIT_FAILURE); /*free all before exit*/
+            free(new_node), free_stack(*stack), exit(EXIT_FAILURE);
         }
         i++;
     }
