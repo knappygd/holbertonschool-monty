@@ -124,8 +124,8 @@ void pint(stack_t **stack, unsigned int line_number)
 */
 void add(stack_t **stack, unsigned int line_number)
 {
-    int nodes = 0;
     stack_t *current;
+    int j = 0;
 
     if (!*stack || (*stack)->next == NULL)
     {
@@ -138,9 +138,11 @@ void add(stack_t **stack, unsigned int line_number)
 
     while (current->next)
     {
-        nodes++;
+        printf("value %d: %d\n", j, current->n);
         current = current->next;
+        j++;
     }
+    printf("value %d: %d\n", j, current->n);
 
     current->prev->n += current->n;
     current->prev->next = NULL;

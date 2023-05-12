@@ -1,10 +1,6 @@
-
+push 3
+push 4
+push 5
+push 6
 add
-pall
-push 7
-swap
-pall
-nop
-pint
-pop
 pall
