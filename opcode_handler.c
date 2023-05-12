@@ -42,9 +42,10 @@ int read_file(FILE *file)
             while (arr[i].opcode != NULL)
             {   /*compare the token with the code of array to get the function*/
                 if (strcmp(token, arr[i].opcode) == 0)
-                {   /*execute the function*/
+                {
+		    flag = 1;/*if instruction exist change the flag to 1*/
+		    /*execute the function*/
                     arr[i].f(&stack, line_number);
-                    flag = 1;/*if instruction exist change the flag to 1*/
                 }
                 i++;
             }
