@@ -1,0 +1,10 @@
+
+add
+pall
+push 7
+swap
+pall
+nop
+pint
+pop
+pall
