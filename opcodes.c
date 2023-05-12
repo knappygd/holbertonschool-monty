@@ -124,28 +124,15 @@ void pint(stack_t **stack, unsigned int line_number)
 */
 void add(stack_t **stack, unsigned int line_number)
 {
-    stack_t *current;
-    int j = 0;
 
-    if (!*stack || (*stack)->next == NULL)
-    {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-        free_stack(*stack);
-        exit(EXIT_FAILURE);
-    }
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	(*stack)->next->n += (*stack)->n;
+	(*stack) = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 
-    current = *stack;
-
-    while (current->next)
-    {
-        printf("value %d: %d\n", j, current->n);
-        current = current->next;
-        j++;
-    }
-    printf("value %d: %d\n", j, current->n);
-
-    current->prev->n += current->n;
-    current->prev->next = NULL;
-    
-    free(current);
 }
