@@ -1,35 +1,33 @@
 #include "monty.h"
 
-/**/
-/**/
+/**
+ * swap - swap two elements from top of the stack
+ * @stack: head node
+ * @line_number: line number where the instruction is
+ */
 void swap(stack_t **stack, unsigned int line_number)
 {
-    stack_t *temp;
+    int temp;
 
-    if (*stack == NULL || (*stack)->next == NULL)
+    if (*stack == NULL || (*stack)->next->next == NULL)
     {
         fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
         exit (EXIT_FAILURE);
     }
-
-    temp = (*stack)->next;
-
-    if (temp->next != NULL)
-    {
-        (*stack)->next = temp->next;
-        (*stack)->next->prev = *stack;
-    }
     else
     {
-        temp->prev->prev = temp;
-        temp->prev->next = NULL;
+        /*swaps the n value from the first two elements of stack*/
+        temp = (*stack)->n;
+        (*stack)->n = (*stack)->next->n;
+        (*stack)->next->n = temp;
     }
-    
-    temp->prev = NULL;
-    temp->next = *stack;
-    (*stack) = temp;
 }
 
+/**
+ * nop - nothing here
+ * @stack: unused
+ * @line_number: unused
+*/
 void nop(stack_t **stack, unsigned int line_number)
 {
     (void)stack;

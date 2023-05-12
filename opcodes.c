@@ -4,7 +4,6 @@
  * push - Adds a new node to the stack with an int value.
  * @stack: Double pointer to the head of the stack
  * @line_number: The line on which the command is executed.
- * 
 */
 void push(stack_t **stack, unsigned int line_number)
 {
@@ -12,7 +11,7 @@ void push(stack_t **stack, unsigned int line_number)
     char *token = NULL;
     int n_push = 0;
 
-    new_node = malloc(sizeof(stack_t));
+    new_node = malloc(sizeof(stack_t)); /*creating node for work*/
     if (!new_node)
     {
         fprintf(stderr, "Error: malloc failed\n");
@@ -22,18 +21,16 @@ void push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    token = strtok(NULL, " \t\n"); /*continua tokenizacion de read_file*/
-    if (token == NULL || !isdigit(*token))
+    token = strtok(NULL, " \t\n"); /*continue static tokenization from read_file*/
+    if (token == NULL || !isdigit(*token)) /*check if is a digit or maybe it will be a segmentation fault*/
     {
         fprintf(stderr, "L%d: usage: push integer\n", line_number);
-        free(new_node);
-        free_stack(*stack);
-        exit(EXIT_FAILURE);
+        free(new_node), free_stack(*stack), exit(EXIT_FAILURE); /*free all before exit*/
     }
-
+    /*convert the character to integer*/
     n_push = atoi(token);
 
-    /*cargando pila*/
+    /*loading stack*/
     new_node->n = n_push;
     new_node->prev= NULL;
 

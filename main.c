@@ -17,7 +17,7 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
-    read_file(file);
+    read_file(file); /*magic is here*/
 
     fclose(file);
     return (0);
