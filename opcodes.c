@@ -18,7 +18,6 @@ void push(stack_t **stack, unsigned int line_number)
         fprintf(stderr, "Error: malloc failed\n");
         if (*stack != NULL)
             free_stack(*stack);
-
         exit(EXIT_FAILURE);
     }
 
@@ -118,33 +117,27 @@ void pint(stack_t **stack, unsigned int line_number)
 */
 void add(stack_t **stack, unsigned int line_number)
 {
-    int sum = 0, i = 0, nodes = 0;
-    stack_t *current = *stack;
+    int nodes = 0;
+    stack_t *current;
 
-    if (!*stack)
+    if (!*stack || (*stack)->next == NULL)
     {
         fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        free_stack(*stack);
         exit(EXIT_FAILURE);
     }
 
-    while (current)
+    current = *stack;
+
+    while (current->next)
     {
         nodes++;
         current = current->next;
     }
 
-    if (nodes < 2)
-    {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-
-    while (i < 2)
-	{
-		sum += (*stack)->n;
-		*stack = (*stack)->next;
-        i++;
-	}
-
-    printf("%d\n", sum);
+    current->prev->n += current->n;
+    printf("%d\n", current->prev->n);
+    current->prev->next = NULL;
+    
+    free(current);
 }

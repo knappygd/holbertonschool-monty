@@ -6,6 +6,11 @@ instruction_t* get_instructions()
     static instruction_t arr[] = {
         {"push", push},
         {"pall", pall},
+        {"pop", pop},
+        {"pint", pint},
+        {"add", add},
+        {"swap", swap},
+        {"nop", nop},
         {NULL, NULL}
     };
     return arr;
@@ -48,11 +53,12 @@ int read_file(FILE *file)
             if (flag == 0)
             {
                 fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-                free_stack(stack), free(buffer), fclose(file);
-                 exit(EXIT_FAILURE);
+                free(buffer), free_stack(stack), fclose(file);
+                exit(EXIT_FAILURE);
             }
         }
     }
+    free(buffer);
     free_stack(stack);
     return (0);
 }
