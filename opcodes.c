@@ -143,7 +143,6 @@ void add(stack_t **stack, unsigned int line_number)
     }
 
     current->prev->n += current->n;
-    printf("%d\n", current->prev->n);
     current->prev->next = NULL;
     
     free(current);
