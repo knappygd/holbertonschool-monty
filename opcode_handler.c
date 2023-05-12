@@ -57,7 +57,6 @@ int read_file(FILE *file)
             }
         }
     }
-    free(buffer);
     free_stack(stack);
     return (0);
 }
