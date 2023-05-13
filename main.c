@@ -10,6 +10,7 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
+    /*argv[1] is the name of file to open. "r" readonly*/
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
@@ -17,7 +18,7 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
-    read_file(file); /*magic is here*/
+    read_file(file);
 
     fclose(file);
     return (0);

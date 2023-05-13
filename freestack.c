@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * free_stack - frees the memory asigned to stack
  * @stack: pointer to the first node of stack
