@@ -1,29 +1,8 @@
 #include "monty.h"
 
 /**
- * get_instructions - Holds an array containing the opcode and the functions.
- *
- * Return: The corresponding array.
-*/
-instruction_t *get_instructions()
-{
-	/*static reserva memoria mientras dure el programa*/
-	static instruction_t arr[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pop", pop},
-		{"pint", pint},
-		{"add", add},
-		{"swap", swap},
-		{"nop", nop},
-		{NULL, NULL}};
-	return (arr);
-}
-
-/**
  * read_file - Handles the content of the file passed.
  * @file: The file (of type FILE *) previously read in main().
- *
  * Return: 0 if successful
 */
 int read_file(FILE *file)
@@ -41,7 +20,6 @@ int read_file(FILE *file)
 			free(buffer);
 			break;
 		}
-
 		line_number++;
 		flag = 0;
 		token = strtok(buffer, " \t\n");
@@ -58,8 +36,7 @@ int read_file(FILE *file)
 			if (flag == 0)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-				free(buffer), free_stack(stack), fclose(file);
-				exit(EXIT_FAILURE);
+				free(buffer), free_stack(stack), fclose(file), exit(EXIT_FAILURE);
 			}
 		}
 	}

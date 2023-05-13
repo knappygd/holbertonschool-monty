@@ -39,6 +39,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+instruction_t *get_instructions();
 int read_file(FILE *file);
 void free_stack(stack_t *stack);
 int space_input(char *input);
