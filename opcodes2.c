@@ -55,7 +55,7 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - Divides the value of the two last nodes.
+ * dvs - Divides the value of the two last nodes.
  * @stack: Double pointer to the head of the stack.
  * @line_number: The line on which the command is executed.
 */
