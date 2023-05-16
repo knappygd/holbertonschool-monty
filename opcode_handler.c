@@ -3,7 +3,7 @@
 /**
  * read_file - Handles the content of te  file passed.
  * @file: The file (of type FILE *) previously read in main.
- * 
+ *
  * Return: 0 if successful.
 */
 int read_file(FILE *file)
