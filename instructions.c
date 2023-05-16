@@ -17,6 +17,7 @@ instruction_t *get_instructions()
 		{"sub", sub},
 		{"div", dvs},
 		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}};
 	return (arr);
 }
