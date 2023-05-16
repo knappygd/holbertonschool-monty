@@ -15,6 +15,7 @@ instruction_t *get_instructions()
 		{"swap", swap},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", dvs},
 		{NULL, NULL}};
 	return (arr);
 }
